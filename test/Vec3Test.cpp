@@ -1,12 +1,13 @@
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "google-build-using-namespace"
 #pragma ide diagnostic ignored "readability-function-cognitive-complexity"
 #pragma ide diagnostic ignored "cppcoreguidelines-avoid-magic-numbers"
 
-#define GSL_MSVC_USE_STL_NOEXCEPTION_WORKAROUND
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include <Vec3.h>
 
-using VMath::Vec3;
+using namespace VMath;
 
 TEST_CASE("Vec3", "[Vectors]")
 {
@@ -47,6 +48,14 @@ TEST_CASE("Vec3", "[Vectors]")
 		REQUIRE(lhs * 2.F == Vec3{ 8.F, 12.F, 16.F });
 		REQUIRE(lhs / 2.F == Vec3{ 2.F, 3.F, 4.F });
 		REQUIRE(-lhs == Vec3{ -4.F, -6.F, -8.F });
+	}
+
+	SECTION("Vector Operations work as intended.")
+	{
+		auto magVec3 = Vec3{ 4.F, 6.F, 8.F };
+		REQUIRE_THAT(magVec3.Magnitude(), Catch::Matchers::WithinRel(10.770329614269007, 0.001)
+		                                  || Catch::Matchers::WithinAbs(0, 0.000001));
+		REQUIRE(Normalized(magVec3) == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
 	}
 }
 

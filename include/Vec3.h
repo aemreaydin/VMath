@@ -23,8 +23,8 @@ namespace VMath
 		[[nodiscard]] auto Magnitude() const -> float;
 		auto Normalize() -> void;
 
-		auto operator()(int _ind) -> float&;
-		auto operator()(int _ind) const -> const float&;
+		auto operator()(size_t _ind) -> float&;
+		auto operator()(size_t _ind) const -> const float&;
 		auto operator+=(const Vec3& _vec3) -> Vec3&;
 		auto operator-=(const Vec3& _vec3) -> Vec3&;
 		auto operator*=(float _valToMul) -> Vec3&;

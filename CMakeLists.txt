@@ -5,9 +5,11 @@ set(CMAKE_CXX_STANDARD 17)
 include(FetchContent)
 
 add_subdirectory(test)
+add_subdirectory(VUtils)
 
 add_library(VMath STATIC src/Vec3.cpp)
 target_include_directories(VMath PUBLIC include)
+target_include_directories(VMath PUBLIC VUtils/include)
 
 option(ENABLE_GSL ON)
 if (ENABLE_GSL)

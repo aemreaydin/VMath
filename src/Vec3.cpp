@@ -1,5 +1,6 @@
 #include "Vec3.h"
 #include "Constants.h"
+#include <Utils.h>
 #include <gsl/gsl>
 
 namespace VMath
@@ -29,14 +30,14 @@ namespace VMath
 		*this /= Magnitude();
 	}
 
-	auto Vec3::operator()(int _ind) -> float&
+	auto Vec3::operator()(size_t _ind) -> float&
 	{
-		return gsl::at(mVec3, _ind);
+		return VUtils::At(mVec3, _ind);
 	}
 
-	auto Vec3::operator()(int _ind) const -> const float&
+	auto Vec3::operator()(size_t _ind) const -> const float&
 	{
-		return gsl::at(mVec3, _ind);
+		return VUtils::At(mVec3, _ind);
 	}
 
 	auto Vec3::operator+=(const Vec3& _vec3) -> Vec3&

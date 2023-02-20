@@ -1,0 +1,3 @@
+[submodule "VUtils"]
+	path = VUtils
+	url = https://github.com/aemreaydin/VUtils

@@ -4,6 +4,9 @@
 #include <limits>
 #include <cmath>
 
-constexpr float EPSILON = std::numeric_limits<float>::min();
+namespace VMath
+{
+	constexpr float EPSILON = std::numeric_limits<float>::min();
+}
 
 #endif //VMATH_CONSTANTS_H

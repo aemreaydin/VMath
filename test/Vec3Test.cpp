@@ -25,6 +25,7 @@ TEST_CASE("Vec3", "[Vectors]")
 		REQUIRE(vec3(2) == vec3.Z());
 
 		REQUIRE_THROWS(vec3(4));
+		REQUIRE_THROWS(vec3(-1));
 	}
 
 	SECTION("Math Operations work as intended.")
@@ -32,8 +33,20 @@ TEST_CASE("Vec3", "[Vectors]")
 		auto lhs = Vec3{ 4.F, 6.F, 8.F };
 		auto rhs = Vec3{ 2.F, 2.F, 2.F };
 
+		lhs += Vec3{ 3.F, 4.F, 5.F };
+		REQUIRE(lhs == Vec3{ 7.F, 10.F, 13.F });
+		lhs -= Vec3{ 3.F, 4.F, 5.F };
+		REQUIRE(lhs == Vec3{ 4.F, 6.F, 8.F });
+		lhs *= 2.F;
+		REQUIRE(lhs == Vec3{ 8.F, 12.F, 16.F });
+		lhs /= 2.F;
+		REQUIRE(lhs == Vec3{ 4.F, 6.F, 8.F });
+
+		REQUIRE(lhs + rhs == Vec3{ 6.F, 8.F, 10.F });
+		REQUIRE(lhs - rhs == Vec3{ 2.F, 4.F, 6.F });
 		REQUIRE(lhs * 2.F == Vec3{ 8.F, 12.F, 16.F });
 		REQUIRE(lhs / 2.F == Vec3{ 2.F, 3.F, 4.F });
+		REQUIRE(-lhs == Vec3{ -4.F, -6.F, -8.F });
 	}
 }
 

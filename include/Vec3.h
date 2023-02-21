@@ -2,6 +2,7 @@
 #define VMATH_VEC3_H
 
 #include <array>
+#include <ostream>
 
 namespace VMath
 {
@@ -20,9 +21,6 @@ namespace VMath
 		[[nodiscard]] auto X() const -> float;
 		[[nodiscard]] auto Y() const -> float;
 		[[nodiscard]] auto Z() const -> float;
-		[[nodiscard]] auto Magnitude() const -> float;
-		auto Normalize() -> void;
-		[[nodiscard]] auto Dot(const Vec3& _other) const -> float;
 
 		auto operator()(size_t _ind) -> float&;
 		auto operator()(size_t _ind) const -> const float&;
@@ -32,8 +30,10 @@ namespace VMath
 		auto operator/=(float _valToDiv) -> Vec3&;
 	};
 
-	[[nodiscard]] auto Normalized(const Vec3& _vec3) -> Vec3;
+	[[nodiscard]] auto Magnitude(const Vec3& _vec3) -> float;
+	[[nodiscard]] auto Normalize(const Vec3& _vec3) -> Vec3;
 	[[nodiscard]] auto Dot(const Vec3& _lhs, const Vec3& _rhs) -> float;
+	[[nodiscard]] auto Cross(const Vec3& _lhs, const Vec3& _rhs) -> Vec3;
 
 	auto operator==(const Vec3& _lhs, const Vec3& _rhs) -> bool;
 	auto operator+(const Vec3& _lhs, const Vec3& _rhs) -> Vec3;
@@ -41,6 +41,8 @@ namespace VMath
 	auto operator*(const Vec3& _vec3, float _valToMul) -> Vec3;
 	auto operator/(const Vec3& _vec3, float _valToDiv) -> Vec3;
 	auto operator-(const Vec3& _vec3) -> Vec3;
+
+	auto operator<<(std::ostream& _ostream, const Vec3& _vec3) -> std::ostream&;
 }// namespace VMath
 
 #endif// VMATH_VEC3_H

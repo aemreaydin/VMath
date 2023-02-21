@@ -20,21 +20,6 @@ namespace VMath
 		return mVec3[2];
 	}
 
-	auto Vec3::Magnitude() const -> float
-	{
-		return sqrt(X() * X() + Y() * Y() + Z() * Z());
-	}
-
-	auto Vec3::Normalize() -> void
-	{
-		*this /= Magnitude();
-	}
-
-	auto Vec3::Dot(const Vec3& _other) const -> float
-	{
-		return X() * _other.X() + Y() * _other.Y() + Z() * _other.Z();
-	}
-
 	auto Vec3::operator()(size_t _ind) -> float&
 	{
 		return VUtils::At(mVec3, _ind);
@@ -79,14 +64,26 @@ namespace VMath
 		return *this;
 	}
 
-	auto Normalized(const Vec3& _vec3) -> Vec3
+	auto Magnitude(const Vec3& _vec3) -> float
 	{
-		return _vec3 / _vec3.Magnitude();
+		return sqrt(_vec3.X() * _vec3.X() + _vec3.Y() * _vec3.Y() + _vec3.Z() * _vec3.Z());
+	}
+
+	auto Normalize(const Vec3& _vec3) -> Vec3
+	{
+		return _vec3 / Magnitude(_vec3);
 	}
 
 	auto Dot(const Vec3& _lhs, const Vec3& _rhs) -> float
 	{
 		return _lhs.X() * _rhs.X() + _lhs.Y() * _rhs.Y() + _lhs.Z() * _rhs.Z();
+	}
+
+	auto Cross(const Vec3& _lhs, const Vec3& _rhs) -> Vec3
+	{
+		return { _lhs.Y() * _rhs.Z() - _lhs.Z() * _rhs.Y(),
+		         _lhs.Z() * _rhs.X() - _lhs.X() * _rhs.Z(),
+		         _lhs.X() * _rhs.Y() - _lhs.Y() * _rhs.X() };
 	}
 
 	auto operator==(const Vec3& _lhs, const Vec3& _rhs) -> bool
@@ -121,5 +118,11 @@ namespace VMath
 	auto operator-(const Vec3& _vec3) -> Vec3
 	{
 		return { -_vec3.X(), -_vec3.Y(), -_vec3.Z() };
+	}
+
+	auto operator<<(std::ostream& _ostream, const Vec3& _vec3) -> std::ostream&
+	{
+		_ostream << std::fixed << "Vec3 { X: " << _vec3.X() << ", Y: " << _vec3.Y() << ", Z: " << _vec3.Z() << " }";
+		return _ostream;
 	}
 }// namespace VMath

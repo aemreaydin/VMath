@@ -53,11 +53,9 @@ TEST_CASE("Vec3", "[Vectors]")
 	SECTION("Vector Operations work as intended.")
 	{
 		auto magVec3 = Vec3{ 4.F, 6.F, 8.F };
-		REQUIRE_THAT(magVec3.Magnitude(), Catch::Matchers::WithinRel(10.770329614269007, 0.001)
-		                                  || Catch::Matchers::WithinAbs(0, 0.000001));
-		REQUIRE(Normalized(magVec3) == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
-		magVec3.Normalize();
-		REQUIRE(magVec3 == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
+		REQUIRE_THAT(Magnitude(magVec3), Catch::Matchers::WithinRel(10.770329614269007, 0.001)
+		                                 || Catch::Matchers::WithinAbs(0, 0.000001));
+		REQUIRE(Normalize(magVec3) == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
 	}
 
 	SECTION("Dot Product works as intended.")
@@ -67,9 +65,14 @@ TEST_CASE("Vec3", "[Vectors]")
 
 		REQUIRE_THAT(Dot(lhs, rhs), Catch::Matchers::WithinRel(56.0, 0.001)
 		                            || Catch::Matchers::WithinAbs(0, 0.000001));
+	}
 
-		REQUIRE_THAT(lhs.Dot(rhs), Catch::Matchers::WithinRel(56.0, 0.001)
-		                           || Catch::Matchers::WithinAbs(0, 0.000001));
+	SECTION("Cross Product works as intended.")
+	{
+		auto lhs = Vec3{ 2.F, 3.F, 4.F };
+		auto rhs = Vec3{ 5.F, 6.F, 7.F };
+
+		REQUIRE(Cross(lhs, rhs) == Vec3{ -3.F, 6.F, -3.F });
 	}
 }
 

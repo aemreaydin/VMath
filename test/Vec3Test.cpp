@@ -56,6 +56,8 @@ TEST_CASE("Vec3", "[Vectors]")
 		REQUIRE_THAT(magVec3.Magnitude(), Catch::Matchers::WithinRel(10.770329614269007, 0.001)
 		                                  || Catch::Matchers::WithinAbs(0, 0.000001));
 		REQUIRE(Normalized(magVec3) == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
+		magVec3.Normalize();
+		REQUIRE(magVec3 == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
 	}
 }
 

@@ -22,6 +22,7 @@ namespace VMath
 		[[nodiscard]] auto Z() const -> float;
 		[[nodiscard]] auto Magnitude() const -> float;
 		auto Normalize() -> void;
+		[[nodiscard]] auto Dot(const Vec3& _other) const -> float;
 
 		auto operator()(size_t _ind) -> float&;
 		auto operator()(size_t _ind) const -> const float&;
@@ -32,6 +33,7 @@ namespace VMath
 	};
 
 	[[nodiscard]] auto Normalized(const Vec3& _vec3) -> Vec3;
+	[[nodiscard]] auto Dot(const Vec3& _lhs, const Vec3& _rhs) -> float;
 
 	auto operator==(const Vec3& _lhs, const Vec3& _rhs) -> bool;
 	auto operator+(const Vec3& _lhs, const Vec3& _rhs) -> Vec3;

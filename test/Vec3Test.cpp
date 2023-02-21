@@ -59,6 +59,18 @@ TEST_CASE("Vec3", "[Vectors]")
 		magVec3.Normalize();
 		REQUIRE(magVec3 == Vec3{ 0.37139067, 0.55708601, 0.74278135 });
 	}
+
+	SECTION("Dot Product works as intended.")
+	{
+		auto lhs = Vec3{ 2.F, 3.F, 4.F };
+		auto rhs = Vec3{ 5.F, 6.F, 7.F };
+
+		REQUIRE_THAT(Dot(lhs, rhs), Catch::Matchers::WithinRel(56.0, 0.001)
+		                            || Catch::Matchers::WithinAbs(0, 0.000001));
+
+		REQUIRE_THAT(lhs.Dot(rhs), Catch::Matchers::WithinRel(56.0, 0.001)
+		                           || Catch::Matchers::WithinAbs(0, 0.000001));
+	}
 }
 
 #pragma clang diagnostic pop

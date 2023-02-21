@@ -30,6 +30,11 @@ namespace VMath
 		*this /= Magnitude();
 	}
 
+	auto Vec3::Dot(const Vec3& _other) const -> float
+	{
+		return X() * _other.X() + Y() * _other.Y() + Z() * _other.Z();
+	}
+
 	auto Vec3::operator()(size_t _ind) -> float&
 	{
 		return VUtils::At(mVec3, _ind);
@@ -77,6 +82,11 @@ namespace VMath
 	auto Normalized(const Vec3& _vec3) -> Vec3
 	{
 		return _vec3 / _vec3.Magnitude();
+	}
+
+	auto Dot(const Vec3& _lhs, const Vec3& _rhs) -> float
+	{
+		return _lhs.X() * _rhs.X() + _lhs.Y() * _rhs.Y() + _lhs.Z() * _rhs.Z();
 	}
 
 	auto operator==(const Vec3& _lhs, const Vec3& _rhs) -> bool
